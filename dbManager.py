@@ -25,14 +25,14 @@ except psycopg2.errors.DuplicateTable:
     pass
 conn.commit()
 
-
+# this moudle hash any password in login ,register and update password
 def hashing(password: str):
     # TODO : this regex just accept when password has 8 or more lenth and have lower case upper case caracters and symols like [!@#$%^&*]
     if re.match(r"([a-zA-Z0-9!@#$%^&*()-=+,<>.?:;|~]{8,})", password):
         text = hashlib.sha1(password.encode())
         return text.hexdigest()
 
-
+# this moudle for register user and create contact table with name contact_USERNAME to save contacts ther
 def register(username, password):
     insert_user_query = f"insert into users values ('{username}','{
         hashing(password)}')"
